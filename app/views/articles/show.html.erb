@@ -6,6 +6,11 @@
 <p>
   <%= @article.body %>
 </p>
+<% if @article.image.exists? %>
+  <p>
+    <%= image_tag @article.image.url %>
+  </p>
+<% end %>
 <p>
   Created at: <%= @article.created_at.strftime("%B %Y") %>
 </p>
@@ -22,5 +27,7 @@
 <%= render partial: 'articles/comment', collection: @article.comments %>
 
 <%= render partial: 'comments/form' %>
-<%= link_to "Back to list", articles_path%>
-<%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "For real?"}  %>
+<%= link_to "Back to list", articles_path %>
+<% if logged_in? %>
+  <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "For real?"}  %>
+<% end %>
