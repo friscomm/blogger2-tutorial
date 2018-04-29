@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :require_login, :except [:show]
+  before_action :require_login, except: [:show, :index]
 
   include ArticlesHelper
   def index
