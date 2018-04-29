@@ -17,6 +17,7 @@
 <p>
   Last modified: <%= @article.updated_at.strftime("%B %Y") %>
 </p>
+<h2>Number of views: <%= @article.view_count %> </h2>
 <p>
   Tags:
   <% @article.tags.each do |tag| %>
