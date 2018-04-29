@@ -1,4 +1,4 @@
-<h1>Is this what you were looking for?</h1>
+<h1 id="article-title">Is this what you were looking for?</h1>
 <%= link_to "Edit", edit_article_path(@article) %>
 <p>
   <%= @article.title %>
@@ -6,6 +6,18 @@
 <p>
   <%= @article.body %>
 </p>
+<% if @article.image.exists? %>
+  <p>
+    <%= image_tag @article.image.url %>
+  </p>
+<% end %>
+<p id="created-at">
+  Created at: <%= @article.created_at.strftime("%B %Y") %>
+</p>
+<p id="last-modified">
+  Last modified: <%= @article.updated_at.strftime("%B %Y") %>
+</p>
+<h2>Number of views: <%= @article.view_count %> </h2>
 <p>
   Tags:
   <% @article.tags.each do |tag| %>
@@ -16,5 +28,7 @@
 <%= render partial: 'articles/comment', collection: @article.comments %>
 
 <%= render partial: 'comments/form' %>
-<%= link_to "Back to list", articles_path%>
-<%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "For real?"}  %>
+<%= link_to "Back to list", articles_path %>
+<% if logged_in? %>
+  <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "For real?"}  %>
+<% end %>
